@@ -56,7 +56,7 @@
 						RSS Feed</a>
 				{/if}
 				{if $show && $release.videos_id > 0}
-					<a href="{$smarty.const.WWW_TOP}/myshows/add/{$release.videos_id}?from={$smarty.server.REQUEST_URI|escape:"url"}"
+					<a href="{$smarty.const.WWW_TOP}/myshows?action=add&id={$release.videos_id}&from={$smarty.server.REQUEST_URI|escape:"url"}"
 					   class="label label-success">Add to My Shows</a>
 					<a class="label label-primary" href="{$serverroot}series/{$release.videos_id}"
 					   title="View all releases for this series">View all episodes</a>
@@ -662,13 +662,12 @@
 										No comments yet...
 									</div>
 								{/if}
-								<form action="/details" method="post">
-									{{csrf_field()}}
+                                {{Form::open(['url' => "details/{$release.guid}"])}}
 									<label for="txtAddComment">Add Comment:</label><br/>
 									<textarea id="txtAddComment" name="txtAddComment" rows="6" cols="60"></textarea>
 									<br/>
-									<input class="btn" type="submit" value="Submit"/>
-								</form>
+                                    {{Form::submit('Submit', ['class' => 'btn btn-default'])}}
+								{{Form::close()}}
 							</div>
 							{if $release.jpgstatus == 1 && $userdata.canpreview == 1}
 								<div id="pane6" class="tab-pane">

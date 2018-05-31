@@ -3,15 +3,15 @@
 		<ol class="breadcrumb">
 			<li><a href="{$smarty.const.WWW_TOP}{$site->home_link}">Home</a></li>
 			/
-			<a href="{$smarty.const.WWW_TOP}/browse/{if ($parentcat == 'music')}Audio{else}{$parentcat}{/if}">{$parentcat}</a>
-			/ {if ($catname != '' && $catname != 'All')} <a
+			<a href="{$smarty.const.WWW_TOP}/{if preg_match('/^alt\.binaries|a\.b|dk\./i', $parentcat)}browse/group?g={else}browse/{/if}{if ($parentcat == 'music')}Audio{else}{$parentcat}{/if}">{$parentcat}</a>
+			/ {if ($catname != '' && $catname != 'all')} <a
 				href="{$smarty.const.WWW_TOP}/browse/{$parentcat}/{$catname}">{$catname}</a>{/if}
 		</ol>
 	</div>
 </div>
 {$site->adbrowse}
 {if $results|@count > 0}
-	<form id="nzb_multi_operations_form" action="get">
+	{{Form::open(['id' => 'nzb_multi_operations_form', 'method' => 'get'])}}
 		<div class="box-body">
 			<div class="row">
 				<div class="col-md-12 col-xs-12">
@@ -240,5 +240,5 @@
 				</div>
 			</div>
 		</div>
-	</form>
+	{{Form::close()}}
 {/if}

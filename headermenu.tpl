@@ -12,7 +12,7 @@
 							<li><a href="{$smarty.const.WWW_TOP}/browse/{$parentcat.title}">TV</a></li>
 							<hr>
 							<li><a href="{$smarty.const.WWW_TOP}/series">TV Series</a></li>
-							<li><a href="{$smarty.const.WWW_TOP}/anime">Anime Series</a></li>
+							<li><a href="{$smarty.const.WWW_TOP}/animelist">Anime Series</a></li>
 							<hr>
 							{foreach $parentcat.subcatlist as $subcat}
 								<li><a href="{$smarty.const.WWW_TOP}/browse/TV/{$subcat.title}">{$subcat.title}</a></li>
@@ -230,8 +230,7 @@
 		{/if}
 		<ul class="nav navbar-left">
 			<li class="">
-				<form class="navbar-form" id="headsearch_form" action="{$smarty.const.WWW_TOP}/search"
-					  method="get">
+                {{Form::open(['id' => 'headsearch_form', 'class' => 'navbar-form', 'url' => 'search', 'method' => 'get'])}}
 					<select class="form-control" id="headcat" name="t">
 						<option class="grouping" value="-1">All</option>
 						{foreach $parentcatlist as $parentcat}
@@ -248,7 +247,7 @@
 						   placeholder="Search" type="text"/>
 					<button id="headsearch_go" type="submit" class="btn btn-success"><i class="fab fa-searchengin"></i>
 					</button>
-				</form>
+				{{Form::close()}}
 			</li>
 		</ul>
 

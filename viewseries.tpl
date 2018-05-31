@@ -70,7 +70,7 @@
 	</div>
 	<br/>
 	<div class="box-body"
-	<form id="nzb_multi_operations_form" action="get">
+	{{Form::open(['id' => 'nzb_multi_operations_form', 'method' => 'get'])}}
 		<div class="well well-sm">
 			<div class="nzb_multi_operations">
 				With Selected:
@@ -106,20 +106,20 @@
 						{if $myshows.id != ''}
 							<a class="myshows btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title
 							   data-original-title="Edit Categories for this show"
-							   href="{$smarty.const.WWW_TOP}/myshows/edit/{$show.id}?from={$smarty.server.REQUEST_URI|escape:"url"}"
+							   href="{$smarty.const.WWW_TOP}/myshows?action=edit&id={$show.id}&from={$smarty.server.REQUEST_URI|escape:"url"}"
 							   rel="edit" name="series{$show.id}">
 								<i class="fa fa-pencil"></i>
 							</a>
 							<a class="myshows btn btn-sm btn-danger" data-toggle="tooltip" data-placement="top" title
 							   data-original-title="Remove from My Shows"
-							   href="{$smarty.const.WWW_TOP}/myshows/delete/{$show.id}?from={$smarty.server.REQUEST_URI|escape:"url"}"
+							   href="{$smarty.const.WWW_TOP}/myshows?action=delete&id={$show.id}&from={$smarty.server.REQUEST_URI|escape:"url"}"
 							   rel="remove" name="series{$show.id}">
 								<i class="fa fa-minus"></i>
 							</a>
 						{else}
 							<a class="myshows btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title
 							   data-original-title="Add to My Shows"
-							   href="{$smarty.const.WWW_TOP}/myshows/add/{$show.id}?from={$smarty.server.REQUEST_URI|escape:"url"}"
+							   href="{$smarty.const.WWW_TOP}/myshows?action=add&id={$show.id}&from={$smarty.server.REQUEST_URI|escape:"url"}"
 							   rel="add" name="series{$show.id}">
 								<i class="fa fa-plus"></i>
 							</a>
@@ -257,5 +257,5 @@
 									{/foreach}
 								</div>
 							</div>
-	</form>
+	{{Form::close()}}
 {/if}

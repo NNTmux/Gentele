@@ -18,7 +18,7 @@
 		<h1>{$animeTitle}
 			{if isset($isadmin)}
 				<a class="btn btn-xs btn-warning" title="Edit AniDB data"
-				   href="{$smarty.const.WWW_TOP}/admin/anidb-edit.php?id={$animeAnidbid}&amp; from={$smarty.server.REQUEST_URI|escape:"url"}">Edit</a>
+				   href="{$smarty.const.WWW_TOP}/admin/anidb-edit/{$animeAnidbid}">Edit</a>
 			{/if}
 		</h1>
 		{if animePicture != ''}
@@ -63,7 +63,7 @@
 			</div>
 		</div>
 	</div>
-	<form id="nzb_multi_operations_form" action="get">
+	{{Form::open(['id' => 'nzb_multi_operations_form', 'method' => 'get'])}}
 		<div class="well well-sm">
 			<div class="nzb_multi_operations">
 				With Selected:
@@ -111,45 +111,45 @@
 								{foreach $animeEpisodeTitles as $result}
 									<tr class="{cycle values=",alt"}">
 										<td>
-											<input id="guid{$result.guid}"
+											<input id="guid{$result->guid}"
 												   type="checkbox" class="flat"
-												   value="{$result.guid}"/></td>
+												   value="{$result->guid}"/></td>
 										<td>
 											<a title="View details"
-											   href="{$smarty.const.WWW_TOP}/details/{$result.guid}">{$result.searchname|escape:"htmlall"|replace:".":" "}</a>
+											   href="{$smarty.const.WWW_TOP}/details/{$result->guid}">{$result->searchname|escape:"htmlall"|replace:".":" "}</a>
 											<div>
 												<div>
-													{if $result.nfoid > 0}<span><a
-																href="{$smarty.const.WWW_TOP}/nfo/{$result.guid}"
+													{if $result->nfoid > 0}<span><a
+																href="{$smarty.const.WWW_TOP}/nfo/{$result->guid}"
 																class="modal_nfo label label-primary text-muted">NFO</a>
 														</span>{/if}
-													{if $result.haspreview == 1 && $userdata.canpreview == 1}<a
-														href="{$smarty.const.WWW_TOP}/covers/preview/{$result.guid}_thumb.jpg"
-														name="name{$result.guid}"
-														title="Screenshot of {$result.searchname|escape:"htmlall"}"
+													{if $result->haspreview == 1 && $userdata.canpreview == 1}<a
+														href="{$smarty.const.WWW_TOP}/covers/preview/{$result->guid}_thumb.jpg"
+														name="name{$result->guid}"
+														title="Screenshot of {$result->searchname|escape:"htmlall"}"
 														class="label label-primary" rel="preview">Preview</a>{/if}
-													<span class="label label-primary">{$result.grabs}
-														Grab{if $result.grabs != 1}s{/if}</span>
-													{if $result.reid > 0}<span class="mediainfo label label-primary"
-																			   title="{$result.guid}">Media</span>{/if}
+													<span class="label label-primary">{$result->grabs}
+														Grab{if $result->grabs != 1}s{/if}</span>
+													{if $result->reid > 0}<span class="mediainfo label label-primary"
+																			   title="{$result->guid}">Media</span>{/if}
 												</div>
 											</div>
 										</td>
-										<td><span class="label label-primary">{$result.category_name}</span></td>
-										<td width="40" title="{$result.postdate}">{$result.postdate|timeago}</td>
-										<td>{$result.size|filesize}</td>
+										<td><span class="label label-primary">{$result->category_name}</span></td>
+										<td width="40" title="{$result->postdate}">{$result->postdate|timeago}</td>
+										<td>{$result->size|filesize}</td>
 										<td class="icon_nzb"><a
-													href="{$smarty.const.WWW_TOP}/getnzb?id={$result.guid}"><i
+													href="{$smarty.const.WWW_TOP}/getnzb?id={$result->guid}"><i
 														class="fa fa-cloud-download text-muted" data-toggle="tooltip"
 														data-placement="top" title
 														data-original-title="Download NZB"></i></a>
-											<a href="{$smarty.const.WWW_TOP}/details/{$result.guid}/#comments"><i
+											<a href="{$smarty.const.WWW_TOP}/details/{$result->guid}/#comments"><i
 														class="fa fa-comments-o text-muted" data-toggle="tooltip"
 														data-placement="top" title
 														data-original-title="Comments"></i></a>
 											<a href="#">
 												<i
-														id="guid{$result.guid}" class="icon_cart fa fa-shopping-basket"
+														id="guid{$result->guid}" class="icon_cart fa fa-shopping-basket"
 														data-toggle="tooltip"
 														data-placement="top" title
 														data-original-title="Send to my Download Basket">
@@ -158,7 +158,7 @@
 											{if isset($sabintegrated) && $sabintegrated !=""}
 												<a href="#">
 													<i
-															id="guid{$result.guid}"
+															id="guid{$result->guid}"
 															class="fa fa-share"
 															data-toggle="tooltip"
 															data-placement="top" title
@@ -181,5 +181,5 @@
 				</div>
 			</div>
 		</div>
-	</form>
+	{{Form::close()}}
 {/if}
